@@ -1,7 +1,8 @@
 body {
   background: url(texture-noise.png);
-  overflow: hidden;
+  /*overflow: hidden;*/
   margin: 0;
+  width: 100%;
   font-size: 14px;
   font-family: "Helvetica Neue", Helvetica;
 }
@@ -83,7 +84,6 @@ a:hover {
 .hint {
   position: absolute;
   right: 0;
-  width: 1280px;
   font-size: 12px;
   color: #999;
 }
