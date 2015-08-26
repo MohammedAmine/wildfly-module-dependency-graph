@@ -40,6 +40,48 @@
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.jolokia</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.13.3</version>
+                <executions>
+                    <execution>
+                        <id>remove-images</id>
+                        <phase>clean</phase>
+                        <goals>
+                            <goal>remove</goal>
+                        </goals>
+                        <configuration>
+                            <images>
+                                <image>
+                                    <name>jamesnetherton/wildfly-dependency-graph</name>
+                                </image>
+                            </images>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>build-docker-image</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                        <configuration>
+                            <images>
+                                <image>
+                                    <name>jamesnetherton/wildfly-dependency-graph</name>
+                                    <build>
+                                        <from>jboss/wildfly</from>
+                                        <assembly>
+                                            <basedir>/opt/jboss/wildfly/standalone/deployments</basedir>
+                                            <descriptorRef>artifact</descriptorRef>
+                                        </assembly>
+                                    </build>
+                                </image>
+                            </images>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
