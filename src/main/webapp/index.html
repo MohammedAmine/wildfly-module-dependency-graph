@@ -89,14 +89,14 @@
         // Enter any new nodes at the parent's previous position.
         var nodeEnter = node.enter().append("svg:g")
                 .attr("id", function (d) {
-                    return d._children || d.name == 'modules' ? d.name : undefined
+                    return d.name == 'modules' ? d.name : undefined
                 })
                 .attr("class", "node")
                 .attr("transform", function (d) {
-                    return "translate(" + source.y0 + "," + source.x0 + ")";
+                    return "translate(" + d.y0 + "," + d.x0 + ")";
                 })
                 .on("click", function (d) {
-                    if (this.id) {
+                    if (d.children == null || d.children.length == 0) {
                         d3.json("rest/module/" + d.name, function (json) {
                             function toggleAll(child) {
                                 if (child.children) {
@@ -111,12 +111,9 @@
                             update(d);
                         });
                     } else {
-                        var parentNode = document.getElementById(d.name)
-                        if (parentNode) {
-                            parentNode.__onclick()
-                            parentNode.scrollIntoView()
-                        } else {
+                        if (d.name != "modules") {
                             toggle(d);
+                            update(d);
                         }
                     }
                 });
@@ -177,7 +174,7 @@
                 .attr("class", "link")
                 .attr("d", function (d) {
                     var o = {x: source.x0, y: source.y0};
-                    return diagonal({source: o, target: o});
+                    return diagonal({source: source, target: o});
                 })
                 .transition()
                 .duration(duration)
