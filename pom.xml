@@ -28,6 +28,7 @@
             <groupId>org.jboss.spec.javax.ws.rs</groupId>
             <artifactId>jboss-jaxrs-api_1.1_spec</artifactId>
             <version>${version.jboss.jaxrs.api}</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
