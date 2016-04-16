@@ -93,7 +93,10 @@
                 })
                 .attr("class", "node")
                 .attr("transform", function (d) {
-                    return "translate(" + d.y0 + "," + d.x0 + ")";
+                    if (d.y0 && d.x0) {
+                      return "translate(" + d.y0 + "," + d.x0 + ")";
+                    }
+                    return "";
                 })
                 .on("click", function (d) {
                     if (d.children == null || d.children.length == 0) {
